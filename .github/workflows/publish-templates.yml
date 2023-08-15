@@ -4,8 +4,8 @@ jobs:
   Publish-Templates:
     runs-on: ubuntu-latest
     env:
-      REMOTE_REPO: "feberts/LaTeX-Templates"
-      REMOTE_CUSTOM_URL: "latex.feb-dev.net" # leave empty ("") if not applicable
+      REMOTE_REPO: "fhswf/LaTeX-Editor"
+      REMOTE_CUSTOM_URL: "latex-fh.feb-dev.net" # leave empty ("") if not applicable
     steps:
       - name: Check out this repo (templates)
         uses: actions/checkout@v3
