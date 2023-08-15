@@ -1,0 +1,44 @@
+name: Publish LaTeX Templates
+on: [push]
+jobs:
+  Publish-Templates:
+    runs-on: ubuntu-latest
+    env:
+      REMOTE_REPO: "feberts/LaTeX-Templates"
+      REMOTE_CUSTOM_URL: "latex.feb-dev.net" # leave empty ("") if not applicable
+    steps:
+      - name: Check out this repo (templates)
+        uses: actions/checkout@v3
+        with:
+          path: this_repo
+      - name: Check out remote repo (website)
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ env.REMOTE_REPO }}
+          path: remote_repo
+      - name: Generate website from templates
+        run: |
+          mkdir ${{ github.workspace }}/new_website/
+          cd ${{ github.workspace }}/this_repo
+          ./generate-website.sh "${{ github.workspace }}/new_website/" "$REMOTE_REPO" "$REMOTE_CUSTOM_URL"
+      - name: Add website to remote repo
+        run: |
+          cd ${{ github.workspace }}/remote_repo
+          git rm -r .
+          cp -r ${{ github.workspace }}/new_website/* .
+          git add .
+      - name: Set up SSH
+        run: |
+          mkdir ~/.ssh
+          echo "${{ secrets.ID_RSA }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          eval $(ssh-agent -s)
+          ssh-add ~/.ssh/id_rsa
+      - name: Commit and push to remote repo
+        run: |
+          cd ${{ github.workspace }}/remote_repo
+          git remote set-url origin "git@github.com:${REMOTE_REPO}.git"
+          git config user.name "github action"
+          git config user.email "noreply"
+          git commit --allow-empty -am "update"
+          git push

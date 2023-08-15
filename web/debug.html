@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>Debug</title>
+        <script src="config.js"></script>
+    </head>
+    <body>
+        <h1>Template name</h1>
+        <p><script>document.write(config_template_name)</script></p>
+
+        <h2>Main TeX file</h2>
+        <p><script>document.write(config_main_tex_file)</script></p>
+
+        <h2>Project files</h2>
+        <script>
+            for(const file of config_project_files)
+            {
+                document.write(file + "<br>")
+            }
+        </script>
+
+        <h2>Placeholders</h2>
+        <script>
+            for(const placeholder of config_placeholders)
+            {
+                document.write(placeholder + "<br>")
+            }
+        </script>
+    </body>
+</html>

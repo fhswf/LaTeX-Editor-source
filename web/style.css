@@ -1,0 +1,143 @@
+body
+{
+    font-family: sans-serif;
+    background: rgb(238, 238, 238);
+}
+
+.content
+{
+    position: relative;
+    width: 85%;
+    max-width: 960px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    padding-top: 1px;
+    padding-bottom: 5px;
+    border-radius: 2px;
+    background: white;
+    box-shadow: 0px 0px 15px 0px lightgrey;
+}
+
+#title
+{
+    font-weight: bold;
+    font-size: 2em;
+    font-variant: small-caps;
+    text-align: center;
+    background: rgb(0, 70, 102);
+    padding: 10px;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 5px 5px 7px 0px lightgray;
+}
+
+#templatename
+{
+    text-align: center;
+    color: rgb(0, 70, 102);
+    text-shadow: 2px 2px 5px lightgray;
+    /* color: rgb(39, 40, 34); */
+}
+
+#latex, #texconsole, #uploadform
+{
+    display: none;
+}
+
+#editor
+{
+    width: 100%;
+    height: 500px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 7px 0px lightgray;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+#pdfviewer
+{
+    margin-bottom: 15px;
+}
+
+#pdfviewerinner
+{
+    width: 100%;
+    height: 600px;
+}
+
+#menu
+{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.button, input[type=submit]
+{
+    height: 38px;
+    padding: 0 30px;
+    text-align: center;
+    font-weight: bold;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid rgb(207, 207, 207);
+    cursor: pointer;
+    /* letter-spacing: 0.05em; */
+    text-transform: uppercase;
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#placeholderform
+{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#uploadform
+{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#uploadbutton
+{
+    margin-top: 25px;
+}
+
+input[type=text], textarea
+{
+    padding: 5px;
+    border: 1px solid rgb(207, 207, 207);
+    width: 50%;
+}
+
+#closebutton
+{
+    margin: 0px;
+    margin-left: 0px;
+    margin-top: 25px;
+}
+
+pre
+{
+    white-space: pre-wrap;
+    max-height: 400px;
+    overflow-y: scroll;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(207, 207, 207);
+    border-radius: 5px;
+    font-family: monospace;
+    overflow-x: auto;
+    background: rgb(247, 247, 247);
+    color: black;
+    padding: 10px;
+}
+
+body, .button { font-family: "Computer Modern Sans", sans-serif; }
