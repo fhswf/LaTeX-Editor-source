@@ -18,7 +18,7 @@ body
     padding-bottom: 5px;
     border-radius: 2px;
     background: white;
-    box-shadow: 0px 0px 15px 0px lightgrey;
+    box-shadow: 0px 0px 15px lightgrey;
 }
 
 #title
@@ -31,7 +31,7 @@ body
     padding: 10px;
     border-radius: 3px;
     color: white;
-    box-shadow: 5px 5px 7px 0px lightgray;
+    box-shadow: 5px 5px 7px lightgray;
 }
 
 #templatename
@@ -42,7 +42,7 @@ body
     /* color: rgb(39, 40, 34); */
 }
 
-#latex, #texconsole, #uploadform
+#latex, #texconsole, #uploadform, #importform, #message
 {
     display: none;
 }
@@ -52,7 +52,7 @@ body
     width: 100%;
     height: 500px;
     border-radius: 5px;
-    box-shadow: 5px 5px 7px 0px lightgray;
+    box-shadow: 5px 5px 7px lightgray;
     margin-top: 20px;
     margin-bottom: 15px;
 }
@@ -73,9 +73,11 @@ body
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
-.button, input[type=submit]
+.button, input[type=submit], .closebutton
 {
     height: 38px;
     padding: 0 30px;
@@ -85,11 +87,12 @@ body
     border-radius: 4px;
     border: 1px solid rgb(207, 207, 207);
     cursor: pointer;
-    /* letter-spacing: 0.05em; */
     text-transform: uppercase;
     margin: 5px;
     margin-left: 10px;
     margin-right: 10px;
+    white-space:nowrap;
+    box-shadow: 3px 3px 5px rgb(245, 245, 245);
 }
 
 #placeholderform
@@ -99,13 +102,17 @@ body
     margin-bottom: 25px;
 }
 
-#uploadform
+#uploadform, #importform
 {
-    margin-top: 25px;
+    margin-top: 15px;
     margin-bottom: 25px;
+    border: 1px solid rgb(207, 207, 207);
+    padding: 10px;
+    padding-top: 0px;
+    border-radius: 5px;
 }
 
-#uploadbutton
+.uploadbutton
 {
     margin-top: 25px;
 }
@@ -117,7 +124,7 @@ input[type=text], textarea
     width: 50%;
 }
 
-#closebutton
+.closebutton
 {
     margin: 0px;
     margin-left: 0px;
@@ -138,6 +145,11 @@ pre
     background: rgb(247, 247, 247);
     color: black;
     padding: 10px;
+}
+
+.spacer
+{
+    width:100%;display: flex;
 }
 
 body, .button { font-family: "Computer Modern Sans", sans-serif; }

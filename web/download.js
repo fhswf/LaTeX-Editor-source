@@ -3,7 +3,7 @@
 //          FILE: download.js
 //
 //         USAGE: ---
-//   DESCRIPTION: This file provides functionality to allow the user to download
+//   DESCRIPTION: This file contains functionality to allow the user to download
 //                the latex project files. It uses the client-zip library:
 //                https://github.com/Touffy/client-zip
 //
@@ -25,6 +25,8 @@ import { downloadZip } from "https://cdn.jsdelivr.net/npm/client-zip/index.js"
  */
 async function download()
 {
+    close_forms();
+
     let download_files = [];
 
     // add project files to array:
@@ -32,8 +34,9 @@ async function download()
     {
         let file_add;
 
-        if(file === config_main_tex_file) // copy main tex file from editor
+        if(file === config_main_tex_file)
         {
+            // copy main tex file from editor:
             file_add = { name: file, lastModified: new Date(), input: editor.getValue() };
         }
         else

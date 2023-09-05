@@ -1,3 +1,27 @@
+# ==============================================================================
+#
+#          FILE: publish-templates.yml
+#
+#         USAGE: called on push
+#
+#   DESCRIPTION: This action generates a website from the latex templates. The
+#                website is created in a temporary directory and then pushed to
+#                the remote repository.
+#
+#       OPTIONS: see section 'env'
+#  REQUIREMENTS: A key pair is needed to be able to push to the remote
+#                repository. The private key needs to be added as a secret named
+#                'ID_RSA' to this repository. The public key needs to be added
+#                as a deploy key to the remote repository.
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Fabian Eberts
+#  ORGANIZATION: ---
+#       CREATED: ---
+#      REVISION: ---
+#
+# ==============================================================================
+
 name: Publish LaTeX Templates
 on: [push]
 jobs:
@@ -5,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REMOTE_REPO: "fhswf/LaTeX-Editor"
-      REMOTE_CUSTOM_URL: "latex-fh.feb-dev.net" # leave empty ("") if not applicable
+      REMOTE_CUSTOM_URL: "latex-fh.feb-dev.net" # optional, leave empty ("") if not needed
     steps:
       - name: Check out this repo (templates)
         uses: actions/checkout@v3

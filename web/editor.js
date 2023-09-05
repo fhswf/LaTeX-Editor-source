@@ -3,7 +3,7 @@
 //          FILE: editor.js
 //
 //         USAGE: ---
-//   DESCRIPTION: This file provides functions that load the swiftlatex engine,
+//   DESCRIPTION: This file contains functions that load the swiftlatex engine,
 //                initialize the code editor, compile the latex document and
 //                display the pdf.
 //       OPTIONS: ---
@@ -26,13 +26,15 @@ const tex_console = document.getElementById("texconsole");
 const console_output = document.getElementById("texconsoleoutput");
 const pdfviewer = document.getElementById("pdfviewer");
 const templatename = document.getElementById("templatename");
+const message = document.getElementById("message");
 
 // -----------------------------------------------------------------------------
-//  variables
+//  constants and variables
 // -----------------------------------------------------------------------------
 
 const editor = ace.edit("editor");
-const uploads = [];
+var uploads = [];
+var compile_first_time = true;
 
 // -----------------------------------------------------------------------------
 //  initialize frontend
@@ -59,22 +61,29 @@ async function init_editor()
     editor.setShowPrintMargin(false);
 
     // read text from latex main file:
-    const response = await fetch(config_main_tex_file);
-    var text = await response.text();
+    var text = await fetch(config_main_tex_file);
+    text = await text.text();
 
     // replace placeholders with form data:
     placeholder_map.forEach(function(user_input, placeholder)
     {
+        placeholder = placeholder.replaceAll('_', '\\'); // demask backslashes
         console.log('placeholder: ' + placeholder + ' = ' + user_input);
         text = text.replaceAll('{{' + placeholder + '}}', user_input);
     })
 
-    // paste text into editor:
+    // paste text into editor and make editor visible:
+    set_editor_text(text);
+    document.getElementById("latex").style.display = "block";
+}
+
+/*
+ * add text to editor
+ */
+async function set_editor_text(text)
+{
     await editor.setValue(text);
     await editor.clearSelection();
-
-    // make editor visible:
-    document.getElementById("latex").style.display = "block";
 }
 
 // -----------------------------------------------------------------------------
@@ -95,12 +104,11 @@ async function add_projectfiles_to_engine()
         await add_file(file);
     }
 
-    await engine.setEngineMainFile(config_main_tex_file);
-    console.log(config_main_tex_file + " set as main file");
+    set_main_tex_file();
 }
 
 /*
- * generic function to add files to the engine
+ * generic function to add a file to the engine
  */
 async function add_file(filename)
 {
@@ -121,28 +129,38 @@ async function add_file(filename)
  */
 async function add_text(filename)
 {
-    let raw = await fetch(filename);
-    let text = await raw.text();
+    let text = await fetch(filename);
+    text = await text.text();
     engine.writeMemFSFile(filename, text);
 }
 
 /*
- * add an image file to the engine
+ * add a binary file to the engine
  */
 async function add_image(filename)
 {
-    let raw = await fetch(filename);
-    let blob = await raw.arrayBuffer();
+    let blob = await fetch(filename);
+    blob = await blob.arrayBuffer();
     engine.writeMemFSFile(filename, new Uint8Array(blob));
+}
+
+/*
+ * set main tex file
+ */
+async function set_main_tex_file()
+{
+    await engine.setEngineMainFile(config_main_tex_file);
+    console.log(config_main_tex_file + " set as main file");
 }
 
 /*
  * initialize the tex engine
  */
-async function init_latex()
+async function init_engine()
 {
+    // load engine and add files:
     await engine.loadEngine();
-    engine.setTexliveEndpoint("http://tex.feb-dev.net:4711/");
+    engine.setTexliveEndpoint(TEXLIVE_SERVER);
     await add_projectfiles_to_engine();
 
     // enable compile button:
@@ -150,13 +168,13 @@ async function init_latex()
     compile_button.disabled = false;
 }
 
-var compile_first_time = true;
-
 /*
  * compile document and display pdf
  */
 async function compile()
 {
+    close_forms();
+
     if(!engine.isReady())
     {
         console.log("engine is not ready");
@@ -180,10 +198,11 @@ async function compile()
         // get references and bibliography right:
         result = await engine.compileLaTeX();
         result = await engine.compileLaTeX();
+        result = await engine.compileLaTeX();
         compile_first_time = false;
     }
 
-    // display compile run console output:
+    // display pdftex console output:
     console_output.innerHTML = result.log;
     tex_console.style.display = "block"; // make element visible
 
@@ -191,14 +210,17 @@ async function compile()
     compile_button.innerHTML = "Kompilieren";
     compile_button.disabled = false;
 
-    // if compilation successful, display pdf:
+    // if compiled successfully, display pdf:
     if(result.status === 0)
     {
         const pdfblob = new Blob([result.pdf], { type : 'application/pdf' });
         const objectURL = URL.createObjectURL(pdfblob);
         setTimeout(()=>{ URL.revokeObjectURL(objectURL); }, 30000);
-        console.log(objectURL);
         pdfviewer.innerHTML = `<embed src="${objectURL}" id="pdfviewerinner" type="application/pdf">`;
+    }
+    else
+    {
+        pdfviewer.innerHTML = ''; // close pdf viewer
     }
 }
 
@@ -206,7 +228,7 @@ async function compile()
 //  initialization
 // -----------------------------------------------------------------------------
 
-// if no placeholders were found, load editor immediately:
+// if no placeholders were found, skip form and load editor immediately:
 if(config_placeholders.length === 0)
 {
     load_editor();
@@ -219,5 +241,5 @@ async function init()
 {
     await init_html();
     await init_editor();
-    await init_latex();
+    await init_engine();
 }

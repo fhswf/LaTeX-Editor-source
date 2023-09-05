@@ -9,6 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ace.js"></script>
     <script src="PdfTeXEngine.js"></script>
     <script src="config.js"></script>
+    <script src="texliveserver.js"></script>
     <script src="form.js"></script>
     <script src="upload.js"></script>
     <script type="module" src="download.js"></script>
@@ -35,19 +36,36 @@
         <!-- menu -->
         <div id="menu">
             <button type="button" onclick="compile()" id="compilebutton" class="button" disabled>Initialisiere ...</button>
+            <span class="spacer"></span>
             <button type="button" onclick="open_upload_form()" class="button">Upload</button>
-            <button type="button" onclick="download()" class="button">Download</button>
+            <button type="button" onclick="open_import_form()" class="button">Import</button>
+            <button type="button" onclick="download()" class="button">Export</button>
         </div>
-    
+
         <!-- file upload -->
         <div id="uploadform">
-            <p> Hochgeladene Dateien können anschließend im LaTeX-Dokument verwendet werden.</p>
+            <h4>Dateien hinzufügen</h4>
+            <p>Eine hochgeladene Datei kann anschließend im LaTeX-Dokument verwendet werden.</p>
             <form enctype="multipart/form-data">
-                <input type="file" id="fileupload"><br>
-                <button type="button" onclick="upload()" id="uploadbutton">Hochladen</button>
+                <input type="file" id="fileupload" multiple><br>
+                <button type="button" onclick="upload()" class="uploadbutton">Hochladen</button>
             </form>
-            <button type="button" onclick="close_upload_form()" class="button" id="closebutton">Upload abbrechen</button>
+            <button type="button" onclick="close_forms()" class="closebutton">Abbrechen</button>
         </div>
+
+        <!-- project import -->
+        <div id="importform">
+            <h4>Projekt importieren</h4>
+            <p>Import eines LaTeX-Projekts durch Hochladen aller zugehöriger Dateien.</p>
+            <form enctype="multipart/form-data">
+                <input type="file" id="projectimport" accept="image/*,.tex,.bib,.sty,.cls,.pdf" multiple><br>
+                <button type="button" onclick="import_project()" class="uploadbutton">Importieren</button>
+            </form>
+            <button type="button" onclick="close_forms()" class="closebutton">Abbrechen</button>
+        </div>
+
+        <!-- message -->
+        <div id="message"></div>
         
         <!-- pdf viewer -->
         <div id="pdfviewer"></div>

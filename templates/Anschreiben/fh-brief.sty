@@ -1,0 +1,118 @@
+% Setup:
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{lmodern}
+\usepackage[left=20mm, right=0mm, top=45mm, bottom=35mm]{geometry}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\usepackage{microtype}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\setlength{\parindent}{0em}
+
+% Weitere Pakete:
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{etoolbox}
+
+% Rechter Seitenrand:
+\newcommand{\randbreite}{0.31\textwidth}
+
+% Kopf- und Fusszeile:
+\usepackage{lastpage}
+\usepackage[headsepline]{scrlayer-scrpage}
+\addtokomafont{pageheadfoot}{\normalshape\sffamily\small}
+\addtokomafont{headsepline}{\color{RoyalBlue}}
+\KOMAoptions{headsepline=0.75pt}
+\ihead{\includegraphics[width=60mm]{fh-header}\vspace{3mm}}
+\cfoot{Seite \thepage~von~\pageref*{LastPage}\hspace{\randbreite}}
+\ofoot{\includegraphics[width=30mm]{fh-footer}\hspace{17mm}}
+% \ifoot{\null\\Schreiben vom\\\today}
+
+% Anschreiben:
+\newcommand{\sep}{$\cdot$~}
+\newenvironment{absender}{\scriptsize\vspace*{2mm}}{\par\vspace{6mm}}
+\newenvironment{empfaenger}{\raggedright}{\par\vspace{25mm}}
+\newenvironment{betreff}{\bfseries\raggedright}{\par\vspace{\baselineskip}}
+\newenvironment{text}{\parindent=0em \parskip=\baselineskip \noindent \ignorespaces}{\par}
+\newenvironment{anschreiben}
+{
+  \daten % rechter Seitenrand
+  \begin{addmargin}[0mm]{\randbreite}
+}{
+  \end{addmargin}
+}
+
+% Absolute Positionierung von Inhalten (fuer Umgebung 'textblock'):
+\usepackage[absolute,
+  %showboxes, % Rahmen anzeigen
+]{textpos}
+\setlength{\TPHorizModule}{1mm} % Skalierung und Einheit
+\setlength{\TPVertModule}{1mm} % Skalierung und Einheit
+\textblockorigin{210mm}{0mm} % Ursprung oben rechts
+
+% Datumsformat:
+\usepackage[style=ddmmyyyy, yearmonthsep={.}, monthdaysep={.}]{datetime2}
+
+% Hyperref:
+\usepackage[hidelinks, pdfa]{hyperref}
+\pdfstringdefDisableCommands{\def\\{}}
+\hypersetup
+{
+    bookmarksopen=false,
+    bookmarksnumbered=true,
+    pdfpagemode=UseOutlines,
+    pdfauthor={\name},
+    pdftitle={},
+    pdfsubject={}
+}
+
+% Daten (rechter Seitenrand):
+\newcommand{\daten}{
+\begin{textblock}{47}[1, 0](0, 0)
+\footnotesize
+\vspace{90mm}
+\standort,\\
+\today
+
+\vspace{14mm}
+\textbf{\fachbereich}
+
+\vspace{4mm}
+\lehreinheit
+
+\vspace{4mm}
+\name
+
+\vspace{4mm}
+Telefon\\
+\telefon\\
+% Telefax\\
+% \fax\\
+E-Mail\\
+\mail
+
+\vspace{9mm}
+\textbf{Standort \standort}\\
+\strasse\\
+\postleitzahl~\standort
+
+\vspace{14mm}
+Fachhochschule\\
+Südwestfalen\\
+Sitz: Iserlohn
+
+\vspace{6mm}
+{
+  \normalsize\bfseries
+  \ifdefstring{\standort}{Hagen}{\color{black}Hagen}{\color{gray}Hagen}\\
+  \ifdefstring{\standort}{Iserlohn}{\color{black}Iserlohn}{\color{gray}Iserlohn}\\
+  \ifdefstring{\standort}{Lüdenscheid}{\color{black}Lüdenscheid}{\color{gray}Lüdenscheid}\\
+  \ifdefstring{\standort}{Meschede}{\color{black}Meschede}{\color{gray}Meschede}\\
+  \ifdefstring{\standort}{Soest}{\color{black}Soest}{\color{gray}Soest}
+}
+
+\vspace{4mm}
+www.fh-swf.de
+\end{textblock}}

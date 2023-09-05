@@ -1,0 +1,44 @@
+\documentclass[a4paper, 10pt, parskip=off, headheight=25mm, footheight=25mm]{scrartcl}
+
+% Vorlage fuer Briefe
+% Getestet mit pdfTeX; Kodierung: UTF8
+% Version 2023-08-22
+
+% Absender:
+\newcommand{\name}{{{Name}}}
+\newcommand{\mail}{{{E-Mail}}}
+\newcommand{\telefon}{{{Telefon}}}
+\newcommand{\fax}{--} % auskommentiert in .sty
+\newcommand{\standort}{Iserlohn}
+\newcommand{\strasse}{Frauenstuhlweg 31}
+\newcommand{\postleitzahl}{58644}
+\newcommand{\fachbereich}{Fachbereich Informatik\\ und Naturwissenschaften}
+\newcommand{\lehreinheit}{Informatik}
+\newcommand{\postfach}{Fachhochschule Südwestfalen \sep Postfach 2061 \sep 58590 Iserlohn}
+
+\usepackage{fh-brief}
+
+\begin{document}
+\begin{anschreiben}
+
+\begin{absender}
+\postfach
+\end{absender}
+
+\begin{empfaenger}
+{{Herrn \\ Max Mustermann \\ Musterstraße 42b \\ 4711 Köln }}
+\end{empfaenger}
+
+\begin{betreff}
+{{Ihr Schreiben vom 1.1.1970}}
+\end{betreff}
+
+\begin{text}
+{{Sehr geehrter Herr Mustermann, ... }}
+\end{text}
+
+\vspace{15mm}
+\name
+
+\end{anschreiben}
+\end{document}

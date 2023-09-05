@@ -1,0 +1,139 @@
+\documentclass[a4paper, 11pt, toc=listof, toc=bib]{scrbook}
+
+% Vorlage fuer Abschlussarbeiten
+% Getestet mit pdfTeX; Kodierung: UTF8
+% Version 2023-08-19
+
+% Hier Daten eintragen:
+\newcommand{\name}{{{Max Mustermann}}}
+\newcommand{\abschlussarbeit}{{{Bachelorarbeit/Masterarbeit}}}
+\newcommand{\hochschule}{Fachhochschule Südwestfalen}
+\newcommand{\datum}{\today}
+\newcommand{\titeldeutsch}{{{Titel der Arbeit}}}
+\newcommand{\titelenglisch}{{{Englischer Titel}}}
+\newcommand{\erstpruefer}{Prof. Dr. ???}
+\newcommand{\zweitpruefer}{Prof. Dr. ???}
+% Ende der Daten
+
+\usepackage[inner=25mm, outer=25mm, top=25mm, lines=50]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage[style=alphabetic, backend=biber, bibencoding=utf8]{biblatex}
+\addbibresource{literatur.bib}\usepackage{csquotes}
+\usepackage{scrlayer-scrpage}\lohead{\rightmark}\rehead{\leftmark}\ohead{\pagemark}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{scrhack}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\setlength{\parindent}{1.5em}
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+\renewcommand{\lstlistlistingname}{Listingverzeichnis}
+\lstset{basicstyle=\small\ttfamily, breaklines=true, numbers=left, keepspaces=true, columns=fixed}
+
+\begin{document}
+\frontmatter % ========== Titel, Abstract, Inhaltverzeichnis ==========
+\include{frontmatter}
+\ofoot*{}\ifoot*{}\cfoot*{}
+\tableofcontents
+
+\mainmatter % ========== Hauptteil ==========
+
+\chapter{Überschrift Ebene eins}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Es folgt eine Abbildungen:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{einstein}
+\caption{Beschreibung der Abbildung.}
+\label{abb_einstein}
+\end{figure}
+
+Abbildung \ref{abb_einstein} kann referenziert werden. Zitat aus \cite{scheme} und \cite[17]{knuth}. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+
+\section{Überschrift Ebene zwei}
+
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\subsection{Überschrift Ebene drei}
+
+Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\section{Aufzählungen, Tabellen und Programmcode}
+
+Eine Aufzählung:
+
+\begin{itemize}
+\item Lorem ipsum
+\item dolor sit amet
+\item consetetur sadipscing elitr
+\item sed diam nonumy
+\end{itemize}
+Eine nummerierte Aufzählung:
+
+\begin{enumerate}
+\item Erster Punkt
+\item Zweiter Punkt
+\item Dritter Punkt
+\end{enumerate}
+Es folgt Tabelle \ref{beispieltabelle}.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrc}
+\toprule
+Linksbündig & Rechtsbündig & Zentriert \\
+\midrule
+Lorem &  13 & amet \\ \addlinespace
+ipsum & 104 & consetetur \\ \addlinespace
+dolor &   7 & sadipscing \\ \addlinespace
+sit   &  -5 & elitr \\
+\bottomrule
+\end{tabular}
+\caption{Beschreibung der Tabelle.}
+\label{beispieltabelle}
+\end{table}
+
+Programmcode im Fließtext: \lstinline{printf("Hello, world!\n");}.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Es folgt Programmlisting \ref{beispiellisting}.
+
+\begin{lstlisting}[caption={Beschreibung des Listings.}, label=beispiellisting, frame=tblr]
+#include <stdio.h>
+
+int main(void)
+{
+    printf("Hello, world!\n");
+}
+\end{lstlisting}
+Ein Listing ohne Titel, welches nicht im Listingverzeichnis aufgefühert wird:
+
+\begin{lstlisting}[numbers=none]
+#include <stdio.h>
+
+int main(void)
+{
+    printf("Hello, world\n");
+}
+\end{lstlisting}
+
+Text kann \emph{kursiv} oder \textbf{fett} gesetzt werden.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\include{mainmatter}
+
+\backmatter % ========== Verzeichnisse ==========
+\printbibliography
+\listoffigures
+\listoftables
+\lstlistoflistings
+\include{erklaerung}
+\end{document}

@@ -8,9 +8,9 @@
 #   DESCRIPTION: This script is executed by the github action to generate a
 #                website from the latex templates.
 #
-#       OPTIONS: TARGET   target directory
-#                REPO     name of remote repository, 'user/repository'
-#                DOMAIN   github custom domain (optional)
+#       OPTIONS: TARGET   temporary target directory
+#                REPO     remote repository name ('user/repository')
+#                DOMAIN   github pages custom domain (optional)
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -21,10 +21,8 @@
 #
 # ==============================================================================
 
-DEBUG=0
-
-# For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
-# This creates the web application in a local directory.
+DEBUG=0 # For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
+        # This creates the web application in a local directory.
 
 function fatal
 {
@@ -42,7 +40,7 @@ function debug
 #  arguments
 # ------------------------------------------------------------------------------
 
-TARGET="$1"/ # remote repository root directory
+TARGET="$1"/ # temporary target directory
 REPO="$2"    # remote repository name
 DOMAIN="$3"  # remote repository github pages custom domain (optional)
 
@@ -52,10 +50,10 @@ DOMAIN="$3"  # remote repository github pages custom domain (optional)
 #  variables
 # ------------------------------------------------------------------------------
 
-DOCS="$TARGET"/docs/ # remote repository web document root
-TEMPLATES=templates/ # local latex templates
-WEB=web/             # local website template
-SWIFT=swiftlatex/    # local swiftlatex modules
+DOCS="$TARGET"/docs/ # web document root
+TEMPLATES=templates/ # latex templates
+WEB=web/             # website template
+SWIFT=swiftlatex/    # swiftlatex modules
 
 # ------------------------------------------------------------------------------
 #  generate website
@@ -100,16 +98,16 @@ do
     template_name="${template_dir%/}" # strip trailing slash
     template_name="$(strip_path "$template_name")"
     debug "    Template name: '$template_name'"
-    add_to_config 'const config_template_name = "'"$template_name"'";'"\n"
+    add_to_config 'var config_template_name = "'"$template_name"'";'"\n"
 
     # main tex file (contains '\documentclass'):
     main_tex_file="$(grep -rl --fixed-strings '\documentclass' "$template_dir")"
     main_tex_file="$(strip_path "$main_tex_file")"
     debug "    Main tex file: '$main_tex_file'"
-    add_to_config 'const config_main_tex_file = "'"$main_tex_file"'";'"\n"
+    add_to_config 'var config_main_tex_file = "'"$main_tex_file"'";'"\n"
 
     # project files:
-    add_to_config 'const config_project_files = ['
+    add_to_config 'var config_project_files = ['
     debug "    Project files:"
 
     for file in "$template_dir"*.* # only files
@@ -128,13 +126,17 @@ do
     add_to_config "];\n"
 
     # placeholders:
-    placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" | sed 's/ /§/g' | sed 's/[{}]//g'))
-    add_to_config 'const config_placeholders = ['
+    # mask spaces before creating the array
+    placeholders=($(grep -E --only-matching "{{[^{}]+}}" "$template_dir"/"$main_tex_file" \
+        | sed 's/ /§/g' \
+        | sed 's/[{}]//g'))
+    add_to_config 'var config_placeholders = ['
     debug "    Placeholders: "
 
     for placeholder in "${placeholders[@]}"
     do
-        placeholder="$(echo "$placeholder" | sed 's/§/ /g')"
+        # demask spaces, then mask backslashes:
+        placeholder="$(echo "$placeholder" | sed 's/§/ /g' | sed -E 's/\\/_/g')"
         add_to_config '"'"$placeholder"'",'
         debug "        '$placeholder'"
     done
@@ -166,6 +168,6 @@ fi
 #  copy latex templates to a seperate directory
 # ------------------------------------------------------------------------------
 
-# Tehnically this is NOT neccessary. It only makes it easier to download a tenplate without having to use the web frontend.
+# Technically this is NOT necessary. It only makes it easier to download a template without having to use the web frontend.
 
 cp -r "$TEMPLATES" "$TARGET"/Vorlagen
