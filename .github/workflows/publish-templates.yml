@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REMOTE_REPO: "fhswf/LaTeX-Editor"
-      REMOTE_CUSTOM_URL: "latex-fh.feb-dev.net" # optional, leave empty ("") if not needed
+      REMOTE_CUSTOM_URL: "" # optional, leave empty ("") if not needed
     steps:
       - name: Check out this repo (templates)
         uses: actions/checkout@v3
