@@ -2,10 +2,10 @@
 
 % Vorlage fuer Ausarbeitungen
 % Getestet mit pdfTeX; Kodierung: UTF8
-% Version 2023-08-19
+% Version 2023-10-13
 
 % Hier Daten eintragen:
-\newcommand{\name}{{{Max Mustermann}}}
+\newcommand{\name}{{{Ihr Name}}}
 \newcommand{\modulname}{{{Name des Moduls}}}
 \newcommand{\thema}{{{Titel der Ausarbeitung}}}
 \newcommand{\hochschule}{Fachhochschule Südwestfalen}
@@ -30,7 +30,7 @@
 
 \usepackage{listings}
 \renewcommand{\lstlistingname}{Listing}
-\lstset{basicstyle=\small\ttfamily, breaklines=true, numbers=left, keepspaces=true, columns=fixed}
+\lstset{basicstyle=\small\ttfamily, breaklines=true, keepspaces=true, columns=fixed}
 
 \title{\thema}
 \author{\name\\ \hochschule \\[5mm] Schriftliche Ausarbeitung im Modul\\ „\modulname“}
@@ -85,9 +85,9 @@ Es folgt Tabelle \ref{beispieltabelle}.
 \toprule
 Linksbündig & Rechtsbündig & Zentriert \\
 \midrule
-Lorem &  13 & amet \\ \addlinespace
-ipsum & 104 & consetetur \\ \addlinespace
-dolor &   7 & sadipscing \\ \addlinespace
+Lorem &  13 & amet \\
+ipsum & 104 & consetetur \\
+dolor &   7 & sadipscing \\
 sit   &  -5 & elitr \\
 \bottomrule
 \end{tabular}
@@ -99,7 +99,7 @@ Programmcode im Fließtext: \lstinline{printf("Hello, world!\n");}.
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 Es folgt Programmlisting \ref{beispiellisting}.
 
-\begin{lstlisting}[caption={Beschreibung des Listings.}, label=beispiellisting, frame=tblr]
+\begin{lstlisting}[caption={Beschreibung des Listings.}, label=beispiellisting, frame=tblr, numbers=left]
 #include <stdio.h>
 
 int main(void)
@@ -109,7 +109,7 @@ int main(void)
 \end{lstlisting}
 Ein Listing ohne Titel, welches nicht im Listingverzeichnis aufgefühert wird:
 
-\begin{lstlisting}[numbers=none]
+\begin{lstlisting}
 #include <stdio.h>
 
 int main(void)

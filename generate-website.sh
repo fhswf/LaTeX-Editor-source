@@ -5,7 +5,7 @@
 #
 #         USAGE: ./generate-website.sh TARGET REPO [DOMAIN]
 #
-#   DESCRIPTION: This script is executed by the github action to generate a
+#   DESCRIPTION: This script is executed by the github workflow to generate a
 #                website from the latex templates.
 #
 #       OPTIONS: TARGET   temporary target directory
@@ -21,8 +21,10 @@
 #
 # ==============================================================================
 
-DEBUG=0 # For local debugging run: ./generate-website.sh remote_temp user/repo cname_entry
-        # This creates the web application in a local directory.
+DEBUG=0
+# for local debugging run literally:
+#   ./generate-website.sh remote_temp user/repo cname_entry
+# this will create the web application in a local directory named remote_temp
 
 function fatal
 {
@@ -54,6 +56,7 @@ DOCS="$TARGET"/docs/ # web document root
 TEMPLATES=templates/ # latex templates
 WEB=web/             # website template
 SWIFT=swiftlatex/    # swiftlatex modules
+LATEXINSTALL=LaTeX-Install.md
 
 # ------------------------------------------------------------------------------
 #  generate website
@@ -101,7 +104,7 @@ do
     add_to_config 'var config_template_name = "'"$template_name"'";'"\n"
 
     # main tex file (contains '\documentclass'):
-    main_tex_file="$(grep -rl --fixed-strings '\documentclass' "$template_dir")"
+    main_tex_file="$(grep -rl --fixed-strings --include *.tex '\documentclass' "$template_dir")"
     main_tex_file="$(strip_path "$main_tex_file")"
     debug "    Main tex file: '$main_tex_file'"
     add_to_config 'var config_main_tex_file = "'"$main_tex_file"'";'"\n"
@@ -171,3 +174,13 @@ fi
 # Technically this is NOT necessary. It only makes it easier to download a template without having to use the web frontend.
 
 cp -r "$TEMPLATES" "$TARGET"/Vorlagen
+
+# remove placeholder syntax elements (curly braces):
+find "$TARGET"/Vorlagen -type f -name *.tex | xargs sed -i -E 's/\{\{([^{}]+)\}\}/\1/g'
+
+# ------------------------------------------------------------------------------
+#  copy install instructions
+# ------------------------------------------------------------------------------
+
+cp "$LATEXINSTALL" "$TARGET"
+add_to_readme "\nAnleitung für die lokale Installation von LaTeX auf dem PC: [${LATEXINSTALL}](./${LATEXINSTALL})\n"

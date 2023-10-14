@@ -4,15 +4,16 @@
 #
 #         USAGE: called on push
 #
-#   DESCRIPTION: This action generates a website from the latex templates. The
+#   DESCRIPTION: This workflow generates a website from the latex templates. The
 #                website is created in a temporary directory and then pushed to
 #                the remote repository.
 #
 #       OPTIONS: see section 'env'
 #  REQUIREMENTS: A key pair is needed to be able to push to the remote
-#                repository. The private key needs to be added as a secret named
-#                'ID_RSA' to this repository. The public key needs to be added
-#                as a deploy key to the remote repository.
+#                repository. The private key needs to be added as an *actions
+#                secret* named 'ID_RSA' to this repository. The public key needs
+#                to be added as a *deploy key* to the remote repository. The
+#                option *allow write access* must be enabled.
 #          BUGS: ---
 #         NOTES: ---
 #        AUTHOR: Fabian Eberts
