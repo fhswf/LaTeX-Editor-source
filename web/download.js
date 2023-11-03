@@ -36,7 +36,7 @@ async function download()
 
         if(file === config_main_tex_file)
         {
-            // copy main tex file from editor:
+            // copy main tex file text from editor:
             file_add = { name: file, lastModified: new Date(), input: editor.getValue() };
         }
         else
@@ -48,8 +48,14 @@ async function download()
     }
 
     // add files uploaded by the user:
-    for(const file of uploads)
+    for(let file of uploads)
     {
+        if(file.name === config_main_tex_file)
+        {
+            // copy main tex file text from editor:
+            file = { name: file.name, lastModified: new Date(), input: editor.getValue() };
+        }
+
         download_files.push(file);
     }
 
