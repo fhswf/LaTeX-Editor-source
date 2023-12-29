@@ -1,19 +1,21 @@
 # ==============================================================================
 #
-#          FILE: publish-templates.yml
+#          FILE: deploy.yml
 #
 #         USAGE: called on push
 #
-#   DESCRIPTION: This workflow generates a website from the latex templates. The
-#                website is created in a temporary directory and then pushed to
-#                the remote repository.
+#   DESCRIPTION: This workflow runs a script that builds the web application and
+#                adds the latex templates. The application is created in a
+#                temporary directory and then pushed to the remote repository.
 #
 #       OPTIONS: see section 'env'
-#  REQUIREMENTS: A key pair is needed to be able to push to the remote
-#                repository. The private key needs to be added as an *actions
-#                secret* named 'ID_RSA' to this repository. The public key needs
-#                to be added as a *deploy key* to the remote repository. The
-#                option *allow write access* must be enabled.
+#
+#  REQUIREMENTS: A key pair is needed to push to the remote repository. The
+#                private key needs to be added as an *actions secret* named
+#                'ID_RSA' to this repository. The public key needs to be added
+#                as a *deploy key* to the remote repository; the option *allow
+#                write access* must be enabled.
+#
 #          BUGS: ---
 #         NOTES: ---
 #        AUTHOR: Fabian Eberts
@@ -23,7 +25,7 @@
 #
 # ==============================================================================
 
-name: Publish LaTeX Templates
+name: Build and deploy 
 on: [push]
 jobs:
   Publish-Templates:
@@ -36,17 +38,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: this_repo
-      - name: Check out remote repo (website)
+      - name: Check out remote repo (web application)
         uses: actions/checkout@v3
         with:
           repository: ${{ env.REMOTE_REPO }}
           path: remote_repo
-      - name: Generate website from templates
+      - name: Build web application
         run: |
           mkdir ${{ github.workspace }}/new_website/
           cd ${{ github.workspace }}/this_repo
-          ./generate-website.sh "${{ github.workspace }}/new_website/" "$REMOTE_REPO" "$REMOTE_CUSTOM_URL"
-      - name: Add website to remote repo
+          ./build.sh "${{ github.workspace }}/new_website/" "$REMOTE_REPO" "$REMOTE_CUSTOM_URL"
+      - name: Add files to remote repo
         run: |
           cd ${{ github.workspace }}/remote_repo
           git rm -r .
@@ -63,7 +65,7 @@ jobs:
         run: |
           cd ${{ github.workspace }}/remote_repo
           git remote set-url origin "git@github.com:${REMOTE_REPO}.git"
-          git config user.name "github action"
+          git config user.name "github-actions"
           git config user.email "noreply"
           git commit --allow-empty -am "update"
           git push
