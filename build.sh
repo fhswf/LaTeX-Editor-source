@@ -86,7 +86,8 @@ mkdir "$DOCS"
 cp -r "$TEMPLATES"/* "$DOCS"/
 
 # create readme:
-add_to_readme "# LaTeX-Vorlagen\n\n"
+add_to_readme "# LaTeX-Editor\n\n"
+add_to_readme "Vorlagen im Online-Editor bearbeiten und kompilieren:\n\n"
 URL="$(echo "$REMOTE_REPO" | sed 's/\//.github.io\//g')"
 
 # generate website for each latex template:
