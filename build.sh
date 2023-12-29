@@ -151,7 +151,7 @@ do
 
     TEMPLATE_URL="$(echo "$URL"/"$template_name")"
     debug "    Link: $TEMPLATE_URL"
-    add_to_readme "* **${template_name}:** [${TEMPLATE_URL}](http://${TEMPLATE_URL})\n"
+    add_to_readme "* **${template_name}:** [${TEMPLATE_URL}](https://${TEMPLATE_URL})\n"
 done
 
 # ------------------------------------------------------------------------------
