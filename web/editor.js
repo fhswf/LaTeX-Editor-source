@@ -164,7 +164,7 @@ async function init_engine()
     await add_projectfiles_to_engine();
 
     // enable compile button:
-    compile_button.innerHTML = "Kompilieren";
+    compile_button.innerHTML = "Compile";
     compile_button.disabled = false;
 }
 
@@ -183,7 +183,7 @@ async function compile()
 
     // disable compile button during compilation:
     compile_button.disabled = true;
-    compile_button.innerHTML = "Kompiliert ...";
+    compile_button.innerHTML = "Compiling ...";
 
     // pass editor text to engine, then compile:
     var editor_text = editor.getValue();
@@ -191,15 +191,25 @@ async function compile()
     engine.writeMemFSFile(config_main_tex_file, editor_text);
 
     // compile document:
-    let result = await engine.compileLaTeX();
+    let result;
 
     if(compile_first_time)
     {
-        // get references and bibliography right:
+        message.innerHTML = '<p style="color: green;">Beim ersten Mal dauert dies eine Weile, da einige LaTeX-Pakete geladen werden müssen.</p>';
+        message.style.display = "block";
+
+        // compile multiple times to get references and bibliography right:
         result = await engine.compileLaTeX();
         result = await engine.compileLaTeX();
         result = await engine.compileLaTeX();
+        result = await engine.compileLaTeX();
+
         compile_first_time = false;
+        message.style.display = "none";
+    }
+    else
+    {
+        result = await engine.compileLaTeX();
     }
 
     // display pdftex console output:
@@ -207,7 +217,7 @@ async function compile()
     tex_console.style.display = "block"; // make element visible
 
     // make compile button visible again:
-    compile_button.innerHTML = "Kompilieren";
+    compile_button.innerHTML = "Compile";
     compile_button.disabled = false;
 
     // if compiled successfully, display pdf:
