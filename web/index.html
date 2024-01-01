@@ -19,7 +19,7 @@
     <!-- heading -->
     <div class="content">
         <h1 id="title">LaTeX-Editor</h1>
-        <h2 id="templatename">Name der Vorlage</h2>
+        <h2 id="templatename"></h2>
     </div>
 
     <!-- placeholders input -->
@@ -44,24 +44,24 @@
 
         <!-- file upload -->
         <div id="uploadform">
-            <h4>Dateien hinzufügen</h4>
-            <p>Eine hochgeladene Datei kann anschließend im LaTeX-Dokument verwendet werden.</p>
+            <h4>Add files</h4>
+            <p>Add files such as images or tex files to use them in the document.</p>
             <form enctype="multipart/form-data">
                 <input type="file" id="fileupload" multiple><br>
-                <button type="button" onclick="upload()" class="uploadbutton">Hochladen</button>
+                <button type="button" onclick="upload()" class="uploadbutton">Submit</button>
             </form>
-            <button type="button" onclick="close_forms()" class="closebutton">Abbrechen</button>
+            <button type="button" onclick="close_forms()" class="closebutton">Cancel</button>
         </div>
 
         <!-- project import -->
         <div id="importform">
-            <h4>Projekt importieren</h4>
-            <p>Import eines LaTeX-Projekts durch Hochladen aller zugehöriger Dateien.</p>
+            <h4>Import a project</h4>
+            <p>Import an existing project by selecting all associated files.</p>
             <form enctype="multipart/form-data">
                 <input type="file" id="projectimport" accept="image/*,.tex,.bib,.sty,.cls,.pdf" multiple><br>
-                <button type="button" onclick="import_project()" class="uploadbutton">Importieren</button>
+                <button type="button" onclick="import_project()" class="uploadbutton">Submit</button>
             </form>
-            <button type="button" onclick="close_forms()" class="closebutton">Abbrechen</button>
+            <button type="button" onclick="close_forms()" class="closebutton">Cancel</button>
         </div>
 
         <!-- message -->
@@ -72,7 +72,7 @@
     
         <!-- console output -->
         <div id="texconsole">
-            <h4>Konsolenausgabe:</h4>
+            <h4>Console output:</h4>
             <pre id="texconsoleoutput"></pre>
         </div>
     </div>

@@ -87,12 +87,12 @@ async function import_project()
     {
         console.log('no main tex file found');
         set_editor_text('');
-        message.innerHTML = '<p style="color: red;">Keine TeX-Hauptdatei gefunden</p>';
+        message.innerHTML = '<p style="color: red;">No main tex file detected!</p>';
         message.style.display = "block";
     }
 
     // update frontend:
-    config_template_name = "Importiertes Projekt";
+    config_template_name = "Imported project";
     templatename.innerHTML = config_template_name;
     pdfviewer.innerHTML = ''; // close pdf viewer
     tex_console.style.display = "none"; // close tex console

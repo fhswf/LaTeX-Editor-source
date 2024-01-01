@@ -46,7 +46,7 @@ function print_form()
         }
     }
 
-    document.write('<input type="submit" value="Weiter">');
+    document.write('<input type="submit" value="Continue">');
     document.write('</form>');
 }
 

@@ -45,7 +45,7 @@ var compile_first_time = true;
  */
 async function init_html()
 {
-    templatename.innerHTML = 'Vorlage „' + config_template_name + '“';
+    templatename.innerHTML = 'Template “' + config_template_name + '”';
 }
 
 /*
@@ -195,7 +195,7 @@ async function compile()
 
     if(compile_first_time)
     {
-        message.innerHTML = '<p style="color: green;">Beim ersten Mal dauert dies eine Weile, da einige LaTeX-Pakete geladen werden müssen.</p>';
+        message.innerHTML = '<p style="color: green;">This may take a while the first time, as some LaTeX packages need to be loaded.</p>';
         message.style.display = "block";
 
         // compile multiple times to get references and bibliography right:
