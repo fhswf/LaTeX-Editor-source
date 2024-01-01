@@ -149,7 +149,8 @@ pre
 
 .spacer
 {
-    width:100%;display: flex;
+    width:100%;
+    display: flex;
 }
 
 body, .button { font-family: "Computer Modern Sans", sans-serif; }
