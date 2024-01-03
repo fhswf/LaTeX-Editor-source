@@ -2,9 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
-\usepackage{lmodern}
-\usepackage[left=20mm, right=0mm, top=45mm, bottom=35mm]{geometry}
 \usepackage{helvet}\renewcommand{\familydefault}{\sfdefault}
+\usepackage[left=20mm, right=0mm, top=45mm, bottom=35mm]{geometry}
 \usepackage{microtype}
 \clubpenalty=10000
 \widowpenalty=10000
@@ -28,7 +27,7 @@
 \ihead{\includegraphics[width=60mm]{fh-header}\vspace{3mm}}
 \cfoot{Seite \thepage~von~\pageref*{LastPage}\hspace{\randbreite}}
 \ofoot{\includegraphics[width=30mm]{fh-footer}\hspace{17mm}}
-% \ifoot{\null\\Schreiben vom\\\today}
+\newcommand{\datuminfusszeile}{\ifoot{\null\\Schreiben vom\\\today}}
 
 % Anschreiben:
 \newcommand{\sep}{$\cdot$~}
@@ -36,6 +35,7 @@
 \newenvironment{empfaenger}{\raggedright}{\par\vspace{25mm}}
 \newenvironment{betreff}{\bfseries\raggedright}{\par\vspace{\baselineskip}}
 \newenvironment{text}{\parindent=0em \parskip=\baselineskip \noindent \ignorespaces}{\par}
+\newcommand{\Titel}{\ifdefempty{\titel}{}{\titel~}}
 \newenvironment{anschreiben}
 {
   \daten % rechter Seitenrand
@@ -68,7 +68,7 @@
     pdfsubject={}
 }
 
-% Daten (rechter Seitenrand):
+% Daten rechte Spalte:
 \newcommand{\daten}{
 \begin{textblock}{47}[1, 0](0, 0)
 \footnotesize
@@ -80,18 +80,18 @@
 \textbf{\fachbereich}
 
 \vspace{4mm}
-\lehreinheit
+\abteilung
 
 \vspace{4mm}
+\ifdefempty{\titel}{}{\titel\\}
 \name
 
 \vspace{4mm}
 Telefon\\
 \telefon\\
-% Telefax\\
-% \fax\\
+\ifdefempty{\fax}{}{Telefax\\\fax\\}
 E-Mail\\
-\mail
+\email
 
 \vspace{9mm}
 \textbf{Standort \standort}\\

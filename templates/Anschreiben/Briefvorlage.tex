@@ -2,21 +2,24 @@
 
 % Vorlage fuer Briefe
 % Getestet mit pdfTeX; Kodierung: UTF8
-% Version 2023-10-13
+% Version 2024-01-03
 
 % Absender:
+\newcommand{\titel}{}
 \newcommand{\name}{{{Ihr Name}}}
-\newcommand{\mail}{{{E-Mail}}}
-\newcommand{\telefon}{{{Telefon}}}
-\newcommand{\fax}{--} % auskommentiert in .sty
-\newcommand{\standort}{Iserlohn} % Hagen, Iserlohn, Lüdenscheid, Meschede oder Soest
+\newcommand{\email}{name@fh-swf.de}
+\newcommand{\telefon}{02371 566-xxxx}
+\newcommand{\fax}{}
+\newcommand{\standort}{Iserlohn} % Optionen: Hagen, Iserlohn, Lüdenscheid, Meschede, Soest
 \newcommand{\strasse}{Frauenstuhlweg 31}
 \newcommand{\postleitzahl}{58644}
 \newcommand{\fachbereich}{Fachbereich Informatik\\ und Naturwissenschaften}
-\newcommand{\lehreinheit}{Informatik} % Abteilung etc.
+\newcommand{\abteilung}{Informatik}
 \newcommand{\postfach}{Fachhochschule Südwestfalen \sep Postfach 2061 \sep 58590 Iserlohn}
 
 \usepackage{fh-brief}
+
+% \datuminfusszeile % Datum zusätzlich in Fußzeile
 
 \begin{document}
 \begin{anschreiben}
@@ -26,19 +29,25 @@
 \end{absender}
 
 \begin{empfaenger}
-{{Herrn \\ Max Mustermann \\ Musterstraße 42b \\ 4711 Köln }}
+{{Herrn \\ Max Mustermann \\ Musterstraße 123 \\ 45678 Musterhausen }}
 \end{empfaenger}
 
 \begin{betreff}
-{{Ihr Schreiben vom 1.1.1970}}
+{{Betreff des Schreibens}}
 \end{betreff}
 
 \begin{text}
-{{Sehr geehrter Herr Mustermann, ... }}
+{{Sehr geehrter Herr Mustermann, }}
+
+die Logos der Hochschule sind in höherer Auflösung im Intranet verfügbar.
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+Mit freundlichen Grüßen
 \end{text}
 
-\vspace{15mm}
-\name
+\vspace{10mm}
+\Titel\name
 
 \end{anschreiben}
 \end{document}
