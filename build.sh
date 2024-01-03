@@ -56,7 +56,7 @@ WEB=web/                 # website template
 SWIFT=swiftlatex/        # swiftlatex modules
 
 # for readme file:
-LATEXINSTALL=LaTeX-Install.md
+LATEXINSTALL=LaTeX-Install
 THIS_REPO=fhswf/LaTeX-Editor-source
 
 # ------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ cp -r "$TEMPLATES"/* "$DOCS"/
 
 # create readme:
 add_to_readme "# LaTeX-Editor\n\n"
-add_to_readme "Vorlagen im Online-Editor bearbeiten und kompilieren:\n\n"
+add_to_readme "Edit and compile templates using the online editor:\n\n"
 URL="$(echo "$REMOTE_REPO" | sed 's/\//.github.io\//g')"
 
 # generate website for each latex template:
@@ -182,7 +182,7 @@ find "$TARGET_DIR"/Vorlagen -type f -name *.tex | xargs sed -i -E 's/\{\{([^{}]+
 #  add install instructions
 # ------------------------------------------------------------------------------
 
-cp "$LATEXINSTALL" "$TARGET_DIR"
-add_to_readme "\nAnleitung für die lokale Installation von LaTeX auf dem PC: [${LATEXINSTALL}](./${LATEXINSTALL})\n"
+cp "$LATEXINSTALL"* "$TARGET_DIR"
+add_to_readme "\n"'See `'"${LATEXINSTALL}"'` for installing LaTeX locally on the PC.'"\n"
 add_to_readme "\n"'### About'"\n\n"
 add_to_readme 'The purpose of this repository is to host the web application and to make the LaTeX templates available. The source code and the templates are maintained in a separate repository: [github.com/'"$THIS_REPO"'](https://github.com/'"$THIS_REPO"')'
