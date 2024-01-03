@@ -1,33 +1,33 @@
-## Installation von LaTeX
+# Installing LaTeX
 
-Anleitung für die lokale Installation von LaTeX auf dem PC.
+Instructions for installing LaTeX locally on the PC.
 
-Zum Kompilieren eines Dokuments wird die TeX-Distribution *TeX Live* benötigt. Als Editor für das Bearbeiten und Kompilieren von Dokumenten ist *TeXstudio* zu empfehlen.
+The TeX distribution *TeX Live* is required to compile a document. For editing documents, the editor *TeXstudio* is a good choice.
 
 **Windows**
 
-Für Windows gibt es Installer:
+There are installers for Windows:
 
 - TeX Live: [www.tug.org/texlive](https://www.tug.org/texlive/)
 - TeXstudio: [www.texstudio.org](https://www.texstudio.org/)
 
-Nach der Installation von TeXstudio muss *Biber* als Bibliographieprogramm ausgewählt werden:  
-*Optionen* > *TeXstudio konfigurieren* > *Erzeugen* > *Standard Bibliographieprogramm: Biber*
+After installing TeXstudio, *Biber* must be configured as the bibliography backend:  
+*Options* > *Configure TeXstudio* > *Build* > *Default Bibliography Tool: Biber*
 
 **macOS**
 
-Auf dem Mac wird TeX Live unter dem Namen *MacTeX* angeboten: [www.tug.org/mactex](https://www.tug.org/mactex/)
+On the Mac, TeX Live is distributed as *MacTeX*: [www.tug.org/mactex](https://www.tug.org/mactex/)
 
-Die Entwicklungsumgebung *TeXShop* ist bereits in MacTeX enthalten. Auf Wunsch kann TeXstudio ([www.texstudio.org](https://www.texstudio.org/)) nachinstalliert werden.
+The editor *TeXShop* is included in MacTeX. TeXstudio ([www.texstudio.org](https://www.texstudio.org/)) can be installed additionally if desired.
 
 **Ubuntu**
 
-Installation von TeX Live über die Paketverwaltung in der Shell:
+Installing TeX Live using the package manager in the command line:
 
     sudo apt-get install texlive texlive-lang-german texlive-latex-extra biber
 
-Installation des Editors TeXstudio:
+Installing the editor TeXstudio:
 
     sudo apt-get install texstudio
 
-Wie oben beschrieben muss anschließend Biber konfiguriert werden.
+As described above, Biber must then be configured.
