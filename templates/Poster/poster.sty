@@ -1,0 +1,97 @@
+\usepackage[margin=8mm, top=\posterHeadHeight, bottom=13mm, footskip=10mm]{geometry}\setlength{\columnsep}{10mm}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[ngerman]{babel}
+
+\addbibresource{literatur.bib}
+\usepackage{csquotes}
+\setcounter{biburllcpenalty}{9000} % Kleinbuchstaben
+\setcounter{biburlucpenalty}{9000} % Großbuchstaben
+\setcounter{biburlnumpenalty}{9000} % Ziffern
+\renewcommand*{\bibfont}{\scriptsize}
+
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{scrhack}
+\usepackage{capt-of}
+
+% \usepackage{setspace}\setstretch{1.1}
+\setcounter{secnumdepth}{0}
+\parindent0pt\parskip6pt
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+\usepackage{scrlayer-scrpage}
+\addtokomafont{pageheadfoot}{\normalshape\sffamily\small\color{colortitle}}
+\ofoot{\today}\ifoot{Fachhochschule Südwestfalen}\cfoot{Modul „\modul“}
+\ohead{}\ihead{}\chead{\huge\bfseries\thema\\\medskip\Large\normalfont\name\medskip}
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+\lstset{basicstyle=\small\ttfamily, breaklines=true, keepspaces=true, columns=fixed}
+
+\usepackage{xcolor}
+\definecolor{colorframe}{rgb}{.1, .4, .5}
+% \definecolor{colorframe}{rgb}{.3, .3, .3}
+\definecolor{colorback}{rgb}{.97, .97, .97}
+\definecolor{colortitle}{rgb}{1, 1, 1}
+
+\usepackage[most]{tcolorbox}
+\newtcolorbox{block}[1]{
+    breakable,
+    enhanced,
+    arc=8pt,
+    sharp corners=downhill,
+    after skip=3mm,
+    % left=3mm,
+    % right=3mm,
+    boxrule=.5mm,
+    toptitle=1.5mm,
+    titlerule=1.5mm,
+    % halign title=center,
+    halign title=flush left,
+    coltitle=colortitle,
+    colframe=colorframe,
+    colback=colorback,
+    fonttitle=\sffamily\bfseries\large,
+    % drop fuzzy shadow southeast,
+    title={#1}
+}
+
+\usepackage{eso-pic}
+\newlength{\headBackgroundHeight}
+\setlength{\headBackgroundHeight}{\posterHeadHeight}
+\addtolength{\headBackgroundHeight}{-\headsep}
+\AddToShipoutPictureBG{\color{colorframe}
+\AtPageUpperLeft{\rule[-\headBackgroundHeight]{\paperwidth}{\headBackgroundHeight}}%
+\AtPageLowerLeft{\rule{\paperwidth}{10mm}}}
+
+\makeatletter
+\renewcommand{\fnum@figure}{Abb.\,\thefigure}
+\renewcommand{\fnum@table}{Tab.\,\thetable}
+\makeatother
+
+\usepackage{enumitem}
+\setlist{noitemsep}
+% \setlist{nosep}
+
+% \twocolumn[
+% \begin{@twocolumnfalse}
+% \begin{center}
+% \color{colorframe}
+% \huge\bfseries
+% \thema
+%
+% \medskip
+%
+% \Large\normalfont
+% \name
+% \end{center}
+% \vspace*{10mm}
+% \end{@twocolumnfalse}
+% ]
